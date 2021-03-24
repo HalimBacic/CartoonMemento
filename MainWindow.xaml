@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CartoonMemento"
         mc:Ignorable="d"
-        Title="MainWindow" Height="839" Width="1474.85">
+        Title="CartoonMemento" Height="839" Width="1474.85" SizeToContent="WidthAndHeight" Topmost="True" ResizeMode="CanResizeWithGrip">
     <Grid Margin="0,0,28,-21">
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="1468" FontFamily="Noto Mono" FontSize="16" Margin="0,0,-47,0">
             <MenuItem Header="File" Height="23" Margin="0" Width="100">
@@ -32,10 +32,10 @@
         <Button x:Name="buttonSave" Content="Save Image" HorizontalAlignment="Left" Margin="234,760,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
         <Button x:Name="buttonLoad" Content="Load Image" HorizontalAlignment="Left" Margin="121,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="buttonLoad_Click"/>
         <Button x:Name="buttonImport" Content="Import sticker" HorizontalAlignment="Left" Margin="10,760,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
-        <Grid HorizontalAlignment="Left" Height="705" Margin="10,33,0,0" VerticalAlignment="Top" Width="314">
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="294" SelectionOpacity="1" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Image x:Name="searchImage" Margin="271,14,10,655" Source="Search_16xMD.png" Stretch="Fill" RenderTransformOrigin="0.545,0.514"/>
-            <StackPanel x:Name="stickers" HorizontalAlignment="Left" Height="625" Margin="10,70,0,0" VerticalAlignment="Top" Width="294"/>
+        <Grid HorizontalAlignment="Left" Height="705" Margin="10,33,0,0" VerticalAlignment="Top" Width="353">
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="333" SelectionOpacity="1" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Image x:Name="searchImage" Margin="294,10,10,655" Source="Search_16x.png" Stretch="Fill" RenderTransformOrigin="-0.214,1.583" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" Width="49"/>
+            <StackPanel x:Name="stickers" HorizontalAlignment="Left" Height="625" Margin="10,70,0,0" VerticalAlignment="Top" Width="333"/>
         </Grid>
         <Grid x:Name="imageGrid" HorizontalAlignment="Left" Height="705" Margin="368,33,0,0" VerticalAlignment="Top" Width="1061">
             <Grid.RowDefinitions>

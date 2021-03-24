@@ -99,7 +99,10 @@
     <Resource Include=".png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Search_16xMD.png" />
+    <Resource Include="SearchAndApps_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Search_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
