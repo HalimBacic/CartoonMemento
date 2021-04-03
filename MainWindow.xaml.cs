@@ -1,9 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
+using System.Drawing;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using Point = System.Drawing.Point;
+using Image = System.Windows.Controls.Image;
 
 namespace CartoonMemento
 {
@@ -12,18 +16,23 @@ namespace CartoonMemento
     /// </summary>
     public partial class MainWindow : Window
     {
- 
+
+        private int first = 0;
+        private DrawingCanvas dc;
         public MainWindow()
         {
             InitializeComponent();
             InitializeStickers();
+
         }
 
         private void InitializeStickers()
         {
+            canvasImage.AllowDrop = true;
             //TODO Change this to avoid hardcore programming
             string path = "D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources";
 
+            dc = new DrawingCanvas(canvasImage);
             string[] dirs = Directory.GetDirectories(path);
 
             foreach (string dir in dirs)
@@ -32,7 +41,10 @@ namespace CartoonMemento
                 Expander exp = new Expander();
                 exp.Header = dirInfo.Name;
                 exp.Width = 330;
-                exp.Height = 170;
+                if (first == 0) {
+                    exp.IsExpanded = true;
+                    first++;
+                }
                 Grid grid = new Grid();
                 grid.Width = 328;
                 string[] files = Directory.GetFiles(dir);
@@ -66,7 +78,6 @@ namespace CartoonMemento
                     image.Source = new BitmapImage(uri);
                     image.Height = 100;
                     image.Width = 100;
-
                     Grid.SetRow(image,rowNum);
                     Grid.SetColumn(image,columnNum);
 
@@ -77,32 +88,48 @@ namespace CartoonMemento
                     }
                     else
                         columnNum++;
-
+                    image.Cursor = Cursors.Hand;
+                    image.MouseDown += CreateSticker;
                     grid.Children.Add(image);
                 }
 
                 ScrollViewer scroll = new ScrollViewer();
                 scroll.Content = grid;
-
+                scroll.Height = 200;
                 exp.Content = scroll;
                 stickers.Children.Add(exp);
             }
         }
-        private void buttonLoad_Click(object sender, RoutedEventArgs e)
+
+        private void ButtonLoad_Click(object sender, RoutedEventArgs e)
         {
+
+
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter="Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
 
             if (ofd.ShowDialog() == true)
             {
+                canvasImage.Children.Clear();
+                Image image = new Image();
                 Uri uri = new Uri(ofd.FileName);
                 image.Source = new BitmapImage(uri);
+                image.Height = canvasImage.Height;
+                dc.LoadImage(image);
                 imageStatus.Text = ofd.FileName;
             }
             else
             {
                 imageStatus.Text = "Failure";
             }
+        }
+
+        private void CreateSticker(object sender, MouseButtonEventArgs e)
+        {
+
+            imageStatus.Text = ((Image)sender).Source.ToString();
+            StickerImage stickerImage = new StickerImage((Image) sender);
+            dc.AddSticker(stickerImage);
         }
     }
 }
