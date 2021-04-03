@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace CartoonMemento
 {
@@ -11,13 +12,31 @@ namespace CartoonMemento
     /// </summary>
     public partial class StickerImage : Canvas
     {
+        public static  readonly DependencyProperty CanMove = DependencyProperty.Register("canMove",typeof(Boolean), typeof(StickerImage));
+
+        public Boolean canMove
+        {
+            get { return (Boolean)this.GetValue(CanMove); }
+            set { this.SetValue(CanMove,value); }
+        }
 
         public StickerImage(Image image)
         {
             InitializeComponent();
             myImage.Source = image.Source;
-            myImage.MouseLeftButtonDown += EditMode;
             myImage.MouseEnter += ChangeCursor;
+            myImage.MouseLeftButtonDown += StartMove;
+            myImage.MouseLeftButtonUp += StopMove;
+        }
+
+        private void StopMove(object sender, MouseButtonEventArgs e)
+        {
+            canMove = false;
+        }
+
+        private void StartMove(object sender, MouseButtonEventArgs e)
+        {
+            canMove = true;
         }
 
         private void ChangeCursor(object sender, MouseEventArgs e)
@@ -25,9 +44,9 @@ namespace CartoonMemento
              myImage.Cursor = Cursors.Hand;
         }
 
-        private void EditMode(object sender, MouseButtonEventArgs e)
+        private void ResizeCursor(object sender, MouseEventArgs e)
         {
-            points.Visibility = System.Windows.Visibility.Visible;
+            ((Ellipse)sender).Cursor = Cursors.SizeNWSE;
         }
     }
 }

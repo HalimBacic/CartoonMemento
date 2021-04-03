@@ -4,10 +4,13 @@ using System.Windows;
 using System.Windows.Input;
 using System.Drawing;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Point = System.Drawing.Point;
 using Image = System.Windows.Controls.Image;
+using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 
 namespace CartoonMemento
 {
@@ -88,7 +91,7 @@ namespace CartoonMemento
                     }
                     else
                         columnNum++;
-                    image.Cursor = Cursors.Hand;
+                    image.Cursor = System.Windows.Input.Cursors.Hand;
                     image.MouseDown += CreateSticker;
                     grid.Children.Add(image);
                 }
@@ -130,6 +133,26 @@ namespace CartoonMemento
             imageStatus.Text = ((Image)sender).Source.ToString();
             StickerImage stickerImage = new StickerImage((Image) sender);
             dc.AddSticker(stickerImage);
+        }
+
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        {
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+     //               RenderTargetBitmap renderImage = new RenderTargetBitmap((int)canvasImage.Width, (int)canvasImage.Height)
+     //                 TODO Uraditi renderovanje
+                    myStream.Close();
+                }
+            }
         }
     }
 }

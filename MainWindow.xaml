@@ -29,7 +29,7 @@
                 <MenuItem Header="Help" Height="23" Width="100"/>
             </MenuItem>
         </Menu>
-        <Button x:Name="buttonSave" Content="Save Image" HorizontalAlignment="Left" Margin="234,760,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
+        <Button x:Name="buttonSave" Content="Save Image" HorizontalAlignment="Left" Margin="234,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="buttonSave_Click"/>
         <Button x:Name="buttonLoad" Content="Load Image" HorizontalAlignment="Left" Margin="121,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonLoad_Click"/>
         <Button x:Name="buttonImport" Content="Import sticker" HorizontalAlignment="Left" Margin="10,760,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
         <Grid HorizontalAlignment="Left" Height="705" Margin="10,33,0,0" VerticalAlignment="Top" Width="353">
