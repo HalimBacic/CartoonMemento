@@ -13,5 +13,9 @@
         <Image x:Name="move" Canvas.Top="10" Canvas.Left="10" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\moveicon.png"></Image>
         <Image x:Name="delete" Canvas.Top="5" Canvas.Left="31" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\trash.png" Height="28" Width="39"/>
         <Image x:Name="resize" Canvas.Top="280" Canvas.Left="280" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\resize.png" MouseEnter="ResizeCursor"></Image>
+        <Image x:Name="pH" Canvas.Left="280" Canvas.Top="240" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\plus.png" Height="20" Width="20" MouseLeftButtonDown="plusHeight" MouseEnter="ChangeCursor"></Image>
+        <Image x:Name="mH" Canvas.Left="280" Canvas.Top="260" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\minus.png" Height="20" Width="20" MouseLeftButtonDown="minusHeight" MouseEnter="ChangeCursor"></Image>
+        <Image x:Name="pW" Canvas.Left="260" Canvas.Top="280" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\plus.png" Height="20" Width="20" MouseLeftButtonDown="plusWidth" MouseEnter="ChangeCursor"></Image>
+        <Image x:Name="mW" Canvas.Left="240" Canvas.Top="280" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\minus.png" Height="20" Width="20" MouseLeftButtonDown="minusWidth" MouseEnter="ChangeCursor"></Image>    
     </Canvas>
 </Canvas>

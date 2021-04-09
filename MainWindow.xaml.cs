@@ -13,6 +13,7 @@ using PointWin = System.Windows.Point;
 using Image = System.Windows.Controls.Image;
 using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
 using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace CartoonMemento
 {
@@ -113,6 +114,7 @@ namespace CartoonMemento
                     myStream.Close();
                 }
             }
+            DialogResult res = MessageBox.Show("Picture saved in folder", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonImport_Click(object sender, RoutedEventArgs e)

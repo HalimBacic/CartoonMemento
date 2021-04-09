@@ -12,6 +12,7 @@ namespace CartoonMemento
         private List<StickerImage> elems = new List<StickerImage>();
         private Canvas canvas;
         private StickerImage activeSticker = null;
+        private Boolean save = false;
 
         public DrawingCanvas(Canvas c)
         {
@@ -31,8 +32,14 @@ namespace CartoonMemento
         public void AddSticker(StickerImage image)
         {
             image.MouseLeftButtonDown += EditMode;
+            canvas.MouseLeave += savePreview;
             canvas.Children.Add(image.stickerCanvas);
             elems.Add(image);
+        }
+
+        private void savePreview(object sender, MouseEventArgs e)
+        {
+            removeActive();
         }
 
         public void removeActive()
@@ -43,8 +50,7 @@ namespace CartoonMemento
 
         private void EditMode(object sender, MouseButtonEventArgs e)
         {
-            foreach (StickerImage sti in elems)
-                sti.StopEdit();
+            removeActive();
 
             MoveSticker((StickerImage)sender);
         }
