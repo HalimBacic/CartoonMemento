@@ -29,17 +29,16 @@ namespace CartoonMemento
             canvas.Children.Add(img);
         }
 
+        public StickerImage getActive()
+        {
+            return activeSticker;
+        }
+
         public void AddSticker(StickerImage image)
         {
             image.MouseLeftButtonDown += EditMode;
-            canvas.MouseLeave += savePreview;
             canvas.Children.Add(image.stickerCanvas);
             elems.Add(image);
-        }
-
-        private void savePreview(object sender, MouseEventArgs e)
-        {
-            removeActive();
         }
 
         public void removeActive()
@@ -62,7 +61,7 @@ namespace CartoonMemento
             activeSticker.delete.MouseLeftButtonDown += RemoveSticker;
         }
 
-        private void RemoveSticker(object sender, MouseButtonEventArgs e)
+        public void RemoveSticker(object sender, MouseButtonEventArgs e)
         {
             RemoveElement(activeSticker);
             activeSticker = null;

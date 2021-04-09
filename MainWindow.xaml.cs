@@ -196,5 +196,20 @@ namespace CartoonMemento
             exp.Content = scroll;
             stickers.Children.Add(exp);
         }
+
+        private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+
+        private void DeleteActiveSticker(object sender, MouseButtonEventArgs e)
+        {
+            dc.RemoveSticker(dc.getActive(),e);
+        }
+
+        private void saveAs(object sender, MouseButtonEventArgs e)
+        {
+            buttonSave_Click(sender,e);
+        }
     }
 }

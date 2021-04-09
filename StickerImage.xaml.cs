@@ -53,30 +53,36 @@ namespace CartoonMemento
 
         private void plusHeight(object sender, MouseEventArgs e)
         {
-            stickerCanvas.Height += 5;
-            points.Height += 5;
-            myImage.Height += 5;
+            configureHeight(5);
         }
 
         private void plusWidth(object sender, MouseEventArgs e)
         {
-            stickerCanvas.Width += 5;
-            points.Width += 5;
-            myImage.Width += 5;
+            configureWidth(5);
         }
 
         private void minusHeight(object sender, MouseEventArgs e)
         {
-            stickerCanvas.Height -= 5;
-            points.Height -= 5;
-            myImage.Height -= 5;
+            configureHeight(-5);
         }
 
         private void minusWidth(object sender, MouseEventArgs e)
         {
-            stickerCanvas.Width -= 5;
-            points.Width -= 5;
-            myImage.Width -= 5;
+            configureWidth(-5);
+        }
+
+        private void configureWidth(int value)
+        {
+            stickerCanvas.Width += value;
+            points.Width += value;
+            myImage.Width += value;
+        }
+
+        private void configureHeight(int value)
+        {
+            stickerCanvas.Height += value;
+            points.Height += value;
+            myImage.Height += value;
         }
     }
 }
