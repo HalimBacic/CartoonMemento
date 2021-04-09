@@ -10,9 +10,8 @@
     <Image x:Name="myImage" Canvas.Top="10" Canvas.Left="10" Height="280" Width="280" Focusable="True">
     </Image>
     <Canvas x:Name="points" Visibility="Hidden">
-    <Ellipse Height="10" Width="10" Fill="Black" Canvas.Left="-5" Canvas.Top="-5" MouseEnter="ResizeCursor"></Ellipse>
-        <Ellipse Height="10" Width="10" Fill="Black" Canvas.Left="295" Canvas.Top="-5" MouseEnter="ResizeCursor"></Ellipse>
-        <Ellipse Height="10" Width="10" Fill="Black" Canvas.Left="-5" Canvas.Top="295" MouseEnter="ResizeCursor"></Ellipse>
-        <Ellipse Height="10" Width="10" Fill="Black" Canvas.Left="295" Canvas.Top="295" MouseEnter="ResizeCursor"></Ellipse>
+        <Image x:Name="move" Canvas.Top="10" Canvas.Left="10" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\moveicon.png"></Image>
+        <Image x:Name="delete" Canvas.Top="5" Canvas.Left="31" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\trash.png" Height="28" Width="39"/>
+        <Image x:Name="resize" Canvas.Top="280" Canvas.Left="280" Source="D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\res\\resize.png" MouseEnter="ResizeCursor"></Image>
     </Canvas>
 </Canvas>

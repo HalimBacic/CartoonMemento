@@ -1,55 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Point = System.Windows.Point;
 using Image = System.Windows.Controls.Image;
 
 namespace CartoonMemento
 {
-    class DrawingCanvas : Canvas
+    public class DrawingCanvas : Canvas
     {
         private List<StickerImage> elems = new List<StickerImage>();
         private Canvas canvas;
+        private StickerImage activeSticker = null;
 
         public DrawingCanvas(Canvas c)
         {
             canvas = c;
             canvas.AllowDrop = true;
+            canvas.MouseMove += MoveActiveSticker;
         }
 
         public void LoadImage(Image img)
         {
+            //TODO Scale image function
+            img.Height = canvas.Height;
+            img.Width = canvas.Width;
             canvas.Children.Add(img);
         }
 
         public void AddSticker(StickerImage image)
         {
-            canvas.Children.Add(image.stickerCanvas);
             image.MouseLeftButtonDown += EditMode;
+            canvas.Children.Add(image.stickerCanvas);
             elems.Add(image);
         }
 
-        private void MoveImage(object sender, MouseEventArgs e)
+        public void removeActive()
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                ((StickerImage)sender).Cursor = Cursors.SizeAll;
-                System.Windows.Point point = Mouse.GetPosition(canvas);
-                Canvas.SetLeft(((StickerImage)sender),point.X);
-                Canvas.SetTop(((StickerImage)sender), point.Y);
-            }
+            foreach (StickerImage sti in elems)
+                sti.StopEdit();
         }
 
         private void EditMode(object sender, MouseButtonEventArgs e)
         {
-            foreach (StickerImage sticker in elems)
+            foreach (StickerImage sti in elems)
+                sti.StopEdit();
+
+            MoveSticker((StickerImage)sender);
+        }
+
+        private void MoveSticker(StickerImage sticker)
+        {
+            activeSticker = sticker;
+            activeSticker.StartEdit();
+            activeSticker.delete.MouseLeftButtonDown += RemoveSticker;
+        }
+
+        private void RemoveSticker(object sender, MouseButtonEventArgs e)
+        {
+            RemoveElement(activeSticker);
+            activeSticker = null;
+        }
+
+        private void MoveActiveSticker(object sender, MouseEventArgs e)
+        {
+            if (activeSticker != null && e.LeftButton == MouseButtonState.Pressed)
             {
-                sticker.points.Visibility = System.Windows.Visibility.Hidden;
-                sticker.canMove = false;
+                Point point = Mouse.GetPosition((Canvas)sender);
+                Canvas.SetLeft(activeSticker,point.X);
+                Canvas.SetTop(activeSticker,point.Y);
             }
-            ((StickerImage)sender).points.Visibility = System.Windows.Visibility.Visible;
-            ((StickerImage)sender).MouseMove += MoveImage;
         }
 
         public void RemoveElement(StickerImage element)

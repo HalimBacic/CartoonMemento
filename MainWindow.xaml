@@ -31,7 +31,7 @@
         </Menu>
         <Button x:Name="buttonSave" Content="Save Image" HorizontalAlignment="Left" Margin="234,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="buttonSave_Click"/>
         <Button x:Name="buttonLoad" Content="Load Image" HorizontalAlignment="Left" Margin="121,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonLoad_Click"/>
-        <Button x:Name="buttonImport" Content="Import sticker" HorizontalAlignment="Left" Margin="10,760,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
+        <Button x:Name="buttonImport" Content="Import sticker" HorizontalAlignment="Left" Margin="10,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="buttonImport_Click"/>
         <Grid HorizontalAlignment="Left" Height="705" Margin="10,33,0,0" VerticalAlignment="Top" Width="353">
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="284" SelectionOpacity="1" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Image x:Name="searchImage" Margin="299,24,22,655" Source="Search_16x.png" Stretch="Fill" RenderTransformOrigin="-0.214,1.583" VerticalAlignment="Center" HorizontalAlignment="Center" Height="26" Width="32"/>
@@ -45,6 +45,6 @@
             <TextBox x:Name="imageStatus" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" TextWrapping="Wrap" Text="PICTURE INFO" VerticalAlignment="Top" Width="1041" FontSize="16"/>
             <Canvas x:Name="canvasImage" HorizontalAlignment="Left" Height="628" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1041" AllowDrop="True"/>
         </Grid>
-        <Canvas HorizontalAlignment="Left" Height="100" Margin="302,806,0,-77" VerticalAlignment="Top" Width="100"/>
+  <!--      <Canvas HorizontalAlignment="Left" Height="100" Margin="302,806,0,-77" VerticalAlignment="Top" Width="100"/>  -->
     </Grid>
 </Window>
