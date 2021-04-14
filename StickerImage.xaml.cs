@@ -73,6 +73,7 @@ namespace CartoonMemento
 
         private void configureWidth(int value)
         {
+            AddUndo();
             stickerCanvas.Width += value;
             points.Width += value;
             myImage.Width += value;
@@ -80,9 +81,16 @@ namespace CartoonMemento
 
         private void configureHeight(int value)
         {
+            AddUndo();
             stickerCanvas.Height += value;
             points.Height += value;
             myImage.Height += value;
+        }
+
+        public void AddUndo()
+        {
+            StickerImage sti = this;
+            canvas.undoredo.AddUndo(sti);
         }
     }
 }

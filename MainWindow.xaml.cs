@@ -22,9 +22,10 @@ namespace CartoonMemento
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        
         private int first = 0;
         private DrawingCanvas dc;
+        private string path = "";
 
         public MainWindow()
         {
@@ -64,6 +65,8 @@ namespace CartoonMemento
                 image.Source = bmp;
                 image.Height = bmp.Height;
                 image.Width = bmp.Width;
+                image.Width = bmp.Width;
+                Console.WriteLine();
                 dc.LoadImage(image);
                 imageStatus.Text = ofd.FileName;
             }
@@ -75,23 +78,26 @@ namespace CartoonMemento
 
         private void CreateSticker(object sender, MouseButtonEventArgs e)
         {
+            Console.WriteLine("Dimenzije:"+((Image)sender).Width+" "+ ((Image)sender).Height);
             imageStatus.Text = ((Image)sender).Source.ToString();
-            StickerImage stickerImage = new StickerImage((Image)sender,this.dc);
+            StickerImage stickerImage = new StickerImage((Image)sender, this.dc);
             dc.AddSticker(stickerImage);
         }
 
-        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            dc.removeActive();
+            dc.RemoveActive();
+
+
             Stream myStream;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
             saveFileDialog1.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
-
             Rect rect = VisualTreeHelper.GetDescendantBounds(canvasImage);
-            RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)canvasImage.Width, (Int32)canvasImage.Height, 96, 96, PixelFormats.Pbgra32);
+
+            RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)dc.Width, (Int32)dc.Height, 96, 96, PixelFormats.Pbgra32);
             DrawingVisual dv = new DrawingVisual();
 
             using (DrawingContext dc = dv.RenderOpen())
@@ -110,14 +116,19 @@ namespace CartoonMemento
             {
                 if ((myStream = saveFileDialog1.OpenFile()) != null)
                 {
+                    path = saveFileDialog1.FileName;
                     png.Save(myStream);
                     myStream.Close();
                 }
             }
-            DialogResult res = MessageBox.Show("Picture saved in folder", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            if (path != "")
+            {
+                DialogResult res = MessageBox.Show("Picture saved in folder", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
-        private void buttonImport_Click(object sender, RoutedEventArgs e)
+        private void ButtonImport_Click(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
 
@@ -130,7 +141,7 @@ namespace CartoonMemento
                 InitializeStickerPack(path);
             }
         }
-        
+
         private void InitializeStickerPack(String dir)
         {
             FileInfo dirInfo = new FileInfo(dir);
@@ -204,12 +215,80 @@ namespace CartoonMemento
 
         private void DeleteActiveSticker(object sender, MouseButtonEventArgs e)
         {
-            dc.RemoveSticker(dc.getActive(),e);
+            dc.RemoveSticker(dc.GetActive(), e);
         }
 
-        private void saveAs(object sender, MouseButtonEventArgs e)
+        private void SaveAs(object sender, MouseButtonEventArgs e)
         {
-            buttonSave_Click(sender,e);
+            ButtonSave_Click(sender, e);
         }
+
+        private void Save(object sender, MouseButtonEventArgs e)
+        {
+            if (path == "")
+                ButtonSave_Click(sender, e);
+            else
+            {
+
+                dc.RemoveActive();
+                MemoryStream myStream = new MemoryStream(); ;
+
+
+                Rect rect = VisualTreeHelper.GetDescendantBounds(canvasImage);
+                RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)canvasImage.Width, (Int32)canvasImage.Height, 96, 96, PixelFormats.Pbgra32);
+                DrawingVisual dv = new DrawingVisual();
+
+                using (DrawingContext dc = dv.RenderOpen())
+                {
+                    VisualBrush vb = new VisualBrush(canvasImage);
+                    dc.DrawRectangle(vb, null, new Rect(new PointWin(), rect.Size));
+                }
+
+                rtb.Render(dv);
+
+                PngBitmapEncoder png = new PngBitmapEncoder();
+
+                png.Frames.Add(BitmapFrame.Create(rtb));
+
+                png.Save(myStream);
+
+                System.Drawing.Image img = System.Drawing.Image.FromStream(myStream);
+                img.Save(path);
+
+
+            }
+
+        }
+
+        private void NewFile(object sender, MouseButtonEventArgs e)
+        {
+            if (path != "")
+            {
+                DialogResult res = MessageBox.Show("Da li zelite trenutnu sliku sacuvati na sistem?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (res == System.Windows.Forms.DialogResult.OK)
+                {
+                    SaveAs(sender, e);
+                }
+                if (res == System.Windows.Forms.DialogResult.Cancel)
+                {
+                    ButtonLoad_Click(sender, e);
+                }
+                path = "";
+            }
+                ButtonLoad_Click(sender, e);
+        }
+
+        private void UndoButton(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("Radim undo");
+            dc.PerformUndo();
+        }
+
+        private void RedoButton(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("Radim redo");
+            dc.PerformRedo();
+        }
+
     }
 }

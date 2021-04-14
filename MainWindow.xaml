@@ -9,27 +9,26 @@
     <Grid Margin="0,0,28,2">
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="1468" FontFamily="Noto Mono" FontSize="16" Margin="0,0,-47,0">
             <MenuItem Header="File" Height="23" Margin="0" Width="100">
-                <MenuItem Header="New" Height="23" Width="100"/>
-                <MenuItem Header="Open" Height="23" Width="100"/>
-                <MenuItem Header="Save" Height="23" Width="100"/>
-                <MenuItem Header="Save as" Height="23" Width="100" FontSize="15" PreviewMouseLeftButtonDown="saveAs"/>
+                <MenuItem Header="New" Height="23" Width="100" PreviewMouseLeftButtonDown="NewFile"/>
+                <MenuItem Header="Open" Height="23" Width="100" PreviewMouseLeftButtonDown="ButtonLoad_Click"/>
+                <MenuItem Header="Save" Height="23" Width="100" PreviewMouseLeftButtonDown="Save"/>
+                <MenuItem Header="Save as" Height="23" Width="100" FontSize="15" PreviewMouseLeftButtonDown="SaveAs"/>
                 <MenuItem Header="Exit" Height="23" Width="100" PreviewMouseLeftButtonDown="Exit_MouseLeftButtonDown"/>
             </MenuItem>
             <MenuItem Header="Edit" Height="23" Margin="0" Width="100">
-                <MenuItem Header="Undo" Height="23" Width="100"/>
-                <MenuItem Header="Redo" Height="23" Width="100"/>
+                <MenuItem Header="Undo" Height="23" Width="100" PreviewMouseLeftButtonDown="UndoButton"/>
+                <MenuItem Header="Redo" Height="23" Width="100" PreviewMouseLeftButtonDown="RedoButton"/>
                 <MenuItem Header="Delete" Height="23" Width="100" PreviewMouseLeftButtonDown="DeleteActiveSticker"/>
-                <MenuItem Header="Edit Image" Height="23" Width="100"/>
-                <MenuItem Header="Import Stickers" Height="23" Width="100"/>
+                <MenuItem Header="Import Stickers" Height="23" Width="100" PreviewMouseLeftButtonDown="ButtonImport_Click"/>
             </MenuItem>
             <MenuItem Header="About" Height="23" Margin="0" Width="100">
-                <MenuItem Header="About" Height="23" Width="100"/>
                 <MenuItem Header="Help" Height="23" Width="100"/>
+                <MenuItem Header="About" Height="23" Width="100"/>
             </MenuItem>
         </Menu>
-        <Button x:Name="buttonSave" Content="Save Image" HorizontalAlignment="Left" Margin="234,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="buttonSave_Click"/>
+        <Button x:Name="buttonSave" Content="Save Image" HorizontalAlignment="Left" Margin="234,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonSave_Click"/>
         <Button x:Name="buttonLoad" Content="Load Image" HorizontalAlignment="Left" Margin="121,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonLoad_Click"/>
-        <Button x:Name="buttonImport" Content="Import sticker" HorizontalAlignment="Left" Margin="10,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="buttonImport_Click"/>
+        <Button x:Name="buttonImport" Content="Import sticker" HorizontalAlignment="Left" Margin="10,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonImport_Click"/>
         <Grid HorizontalAlignment="Left" Height="705" Margin="10,33,0,0" VerticalAlignment="Top" Width="353">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="34*"/>
@@ -45,7 +44,8 @@
                 <RowDefinition Height="159*"/>
             </Grid.RowDefinitions>
             <TextBox x:Name="imageStatus" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" TextWrapping="Wrap" Text="PICTURE INFO" VerticalAlignment="Top" Width="1041" FontSize="16"/>
-            <Canvas x:Name="canvasImage" HorizontalAlignment="Left" Height="628" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1041" AllowDrop="True"/>
+            <Canvas x:Name="canvasImage" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" AllowDrop="True" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+            </Canvas>
         </Grid>
         <!--      <Canvas HorizontalAlignment="Left" Height="100" Margin="302,806,0,-77" VerticalAlignment="Top" Width="100"/>  -->
     </Grid>
