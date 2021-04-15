@@ -29,6 +29,20 @@ namespace CartoonMemento
             myImage.MouseEnter += ChangeCursor;
         }
 
+        public StickerImage(StickerImage sti)
+        {
+            this.stickerCanvas = sti.stickerCanvas;
+            this.myImage = sti.myImage;
+            this.points = sti.points;
+            this.move = sti.move;
+            this.delete = sti.delete;
+            this.resize = sti.resize;
+            this.pH = sti.pH;
+            this.pW = sti.pW;
+            this.mH = sti.mH;
+            this.mW = sti.mW;
+        }
+
         public void StopEdit()
         {
             canMove = false;

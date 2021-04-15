@@ -11,8 +11,6 @@ namespace CartoonMemento
     {
         private Stack undoStack = new Stack();
         private Stack redoStack = new Stack();
-        private Boolean addAction = false;
-        private Boolean deleteAction = false;
 
 
         public UndoRedo()
@@ -20,11 +18,14 @@ namespace CartoonMemento
 
         public void AddUndo(StickerImage sti)
         {
+            Console.WriteLine("Dodajem undo:"+sti.GetHashCode()+sti.Height+"  "+sti.Width+"  "+ DrawingCanvas.GetLeft(sti), DrawingCanvas.GetTop(sti));
             undoStack.Push(sti);
         }
 
         public void AddRedo(StickerImage sti)
         {
+            Console.WriteLine("Dodajem undo:" + sti.GetHashCode() + sti.Height + "  " + sti.Width + "  " + DrawingCanvas.GetLeft(sti), DrawingCanvas.GetTop(sti));
+            Console.WriteLine("Dodajem:" + sti.GetHashCode());
             redoStack.Push(sti);
         }
 

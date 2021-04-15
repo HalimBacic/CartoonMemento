@@ -14,7 +14,6 @@ namespace CartoonMemento
         private Canvas canvas;
         private StickerImage activeSticker = null;
         private Boolean save = false;
-        public UndoRedo undoredo = new UndoRedo();
         public static readonly DependencyProperty HeightProperty = DependencyProperty.Register("Height", typeof(double), typeof(DrawingCanvas));
 
         public double Height {
@@ -68,7 +67,6 @@ namespace CartoonMemento
             image.MouseLeftButtonDown += EditMode;
             canvas.Children.Add(image.stickerCanvas);
             elems.Add(image);
-            undoredo.AddUndo(image);
         }
 
         public void RemoveActive()
@@ -93,7 +91,6 @@ namespace CartoonMemento
 
         public void RemoveSticker(object sender, MouseButtonEventArgs e)
         {
-            AddUndo(activeSticker);
             RemoveElement(activeSticker);
             activeSticker = null;
         }
@@ -102,7 +99,6 @@ namespace CartoonMemento
         {
             if (activeSticker != null && e.LeftButton == MouseButtonState.Pressed)
             {
-                AddUndo(activeSticker);
                 Point point = Mouse.GetPosition((Canvas)sender);
                 Canvas.SetLeft(activeSticker, point.X);
                 Canvas.SetTop(activeSticker, point.Y);
@@ -111,37 +107,8 @@ namespace CartoonMemento
 
         public void RemoveElement(StickerImage element)
         {
-            AddUndo(element);
             canvas.Children.Remove(element);
             elems.Remove(element);
-        }
-
-        public void AddUndo(StickerImage element)
-        {
-            StickerImage sti = element;
-            undoredo.AddUndo(sti);
-        }
-
-        public void PerformUndo()
-        {
-            Console.WriteLine("Perform Undo");
-            if (activeSticker != null)
-                RemoveElement(activeSticker);
-
-            StickerImage image = undoredo.Undo();
-            undoredo.AddRedo(image);
-            AddSticker(image);
-        }
-
-        public void PerformRedo()
-        {
-            Console.WriteLine("Perform Redo");
-            if (activeSticker != null)
-                RemoveElement(activeSticker);
-
-            StickerImage image = undoredo.Redo();
-            undoredo.AddUndo(image);
-            AddSticker(image);
         }
     }
 }
