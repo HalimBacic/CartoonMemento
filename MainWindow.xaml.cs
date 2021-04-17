@@ -88,7 +88,6 @@ namespace CartoonMemento
         {
             dc.RemoveActive();
 
-
             Stream myStream;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
@@ -281,14 +280,19 @@ namespace CartoonMemento
         private void UndoButton(object sender, MouseButtonEventArgs e)
         {
             Console.WriteLine("Radim undo");
-     //       dc.PerformUndo();
+            dc.PerformUndo();
         }
 
         private void RedoButton(object sender, MouseButtonEventArgs e)
         {
             Console.WriteLine("Radim redo");
-    //        dc.PerformRedo();
+            dc.PerformRedo();
         }
 
+        private void HelpWindow(object sender, MouseButtonEventArgs e)
+        {
+            Help helpWindow = new Help();
+            helpWindow.Show();
+        }
     }
 }

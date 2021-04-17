@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="CartoonMemento" Height="839" Width="1474.85" SizeToContent="WidthAndHeight" Topmost="True" ResizeMode="CanResizeWithGrip" AllowDrop="True">
     <Grid Margin="0,0,28,2">
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="1468" FontFamily="Noto Mono" FontSize="16" Margin="0,0,-47,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="208*"/>
+            <ColumnDefinition Width="1231*"/>
+        </Grid.ColumnDefinitions>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="1468" FontFamily="Noto Mono" FontSize="16" Margin="0,0,-29,0" Grid.ColumnSpan="2">
             <MenuItem Header="File" Height="23" Margin="0" Width="100">
                 <MenuItem Header="New" Height="23" Width="100" PreviewMouseLeftButtonDown="NewFile"/>
                 <MenuItem Header="Open" Height="23" Width="100" PreviewMouseLeftButtonDown="ButtonLoad_Click"/>
@@ -21,15 +25,17 @@
                 <MenuItem Header="Delete" Height="23" Width="100" PreviewMouseLeftButtonDown="DeleteActiveSticker"/>
                 <MenuItem Header="Import Stickers" Height="23" Width="100" PreviewMouseLeftButtonDown="ButtonImport_Click"/>
             </MenuItem>
-            <MenuItem Header="About" Height="23" Margin="0" Width="100">
-                <MenuItem Header="Help" Height="23" Width="100"/>
-                <MenuItem Header="About" Height="23" Width="100"/>
+            <Separator></Separator>
+            <MenuItem Height="18" Margin="0" Width="30" PreviewMouseLeftButtonDown="HelpWindow">
+                <MenuItem.Icon>
+                    <Image Source="D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento\resources\res\help.png"/>
+                </MenuItem.Icon>
             </MenuItem>
         </Menu>
-        <Button x:Name="buttonSave" Content="Save Image" HorizontalAlignment="Left" Margin="234,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonSave_Click"/>
-        <Button x:Name="buttonLoad" Content="Load Image" HorizontalAlignment="Left" Margin="121,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonLoad_Click"/>
+        <Button x:Name="buttonSave" Content="Save Image" HorizontalAlignment="Left" Margin="26,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonSave_Click" Grid.Column="1"/>
+        <Button x:Name="buttonLoad" Content="Load Image" HorizontalAlignment="Left" Margin="121,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonLoad_Click" Grid.ColumnSpan="2"/>
         <Button x:Name="buttonImport" Content="Import sticker" HorizontalAlignment="Left" Margin="10,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonImport_Click"/>
-        <Grid HorizontalAlignment="Left" Height="705" Margin="10,33,0,0" VerticalAlignment="Top" Width="353">
+        <Grid HorizontalAlignment="Left" Height="705" Margin="10,33,0,0" VerticalAlignment="Top" Width="353" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="34*"/>
                 <ColumnDefinition Width="319*"/>
@@ -38,7 +44,7 @@
             <Image x:Name="searchImage" Margin="265,24,22,655" Source="Search_16x.png" Stretch="Fill" RenderTransformOrigin="-0.214,1.583" VerticalAlignment="Center" HorizontalAlignment="Center" Height="26" Width="32" Grid.Column="1"/>
             <StackPanel x:Name="stickers" HorizontalAlignment="Left" Height="625" Margin="10,70,0,0" VerticalAlignment="Top" Width="333" Grid.ColumnSpan="2"/>
         </Grid>
-        <Grid x:Name="imageGrid" HorizontalAlignment="Left" Height="705" Margin="368,33,0,0" VerticalAlignment="Top" Width="1061">
+        <Grid x:Name="imageGrid" HorizontalAlignment="Left" Height="705" Margin="160,33,0,0" VerticalAlignment="Top" Width="1061" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="14*"/>
                 <RowDefinition Height="159*"/>

@@ -12,8 +12,8 @@ namespace CartoonMemento
     /// </summary>
     public partial class StickerImage : Canvas
     {
+        public int id;
         public static  readonly DependencyProperty CanMove = DependencyProperty.Register("canMove",typeof(Boolean), typeof(StickerImage));
-        private DrawingCanvas canvas;
 
         public Boolean canMove
         {
@@ -23,24 +23,15 @@ namespace CartoonMemento
 
         public StickerImage(Image image,DrawingCanvas canvas)
         {
+            Random random = new Random();
             InitializeComponent();
-            this.canvas = canvas;
             myImage.Source = image.Source;
             myImage.MouseEnter += ChangeCursor;
         }
 
-        public StickerImage(StickerImage sti)
+        public StickerImage Copy()
         {
-            this.stickerCanvas = sti.stickerCanvas;
-            this.myImage = sti.myImage;
-            this.points = sti.points;
-            this.move = sti.move;
-            this.delete = sti.delete;
-            this.resize = sti.resize;
-            this.pH = sti.pH;
-            this.pW = sti.pW;
-            this.mH = sti.mH;
-            this.mW = sti.mW;
+            return (StickerImage)this.MemberwiseClone();
         }
 
         public void StopEdit()
@@ -65,46 +56,20 @@ namespace CartoonMemento
             ((Image)sender).Cursor = Cursors.SizeNWSE;
         }
 
-        private void plusHeight(object sender, MouseEventArgs e)
-        {
-            configureHeight(5);
-        }
 
-        private void plusWidth(object sender, MouseEventArgs e)
+ 
+        public void configureWidth(int value)
         {
-            configureWidth(5);
-        }
-
-        private void minusHeight(object sender, MouseEventArgs e)
-        {
-            configureHeight(-5);
-        }
-
-        private void minusWidth(object sender, MouseEventArgs e)
-        {
-            configureWidth(-5);
-        }
-
-        private void configureWidth(int value)
-        {
-            AddUndo();
             stickerCanvas.Width += value;
             points.Width += value;
             myImage.Width += value;
         }
 
-        private void configureHeight(int value)
+        public void configureHeight(int value)
         {
-            AddUndo();
             stickerCanvas.Height += value;
             points.Height += value;
             myImage.Height += value;
-        }
-
-        public void AddUndo()
-        {
-            StickerImage sti = this;
-            canvas.undoredo.AddUndo(sti);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace CartoonMemento
         private StickerImage activeSticker = null;
         private Boolean save = false;
         public static readonly DependencyProperty HeightProperty = DependencyProperty.Register("Height", typeof(double), typeof(DrawingCanvas));
+        private UndoRedo UndoRedo = new UndoRedo();
 
         public double Height {
             get { return (double)GetValue(HeightProperty); }
@@ -65,8 +66,42 @@ namespace CartoonMemento
         public void AddSticker(StickerImage image)
         {
             image.MouseLeftButtonDown += EditMode;
+            image.pH.MouseLeftButtonDown += plusHeight;
+            image.mH.MouseLeftButtonDown += minusHeight;
+            image.pW.MouseLeftButtonDown += plusWidth;
+            image.mW.MouseLeftButtonDown += minusWidth;
             canvas.Children.Add(image.stickerCanvas);
-            elems.Add(image);
+            elems.Add(image);   
+        }
+
+        private void minusHeight(object sender, MouseButtonEventArgs e)
+        {
+            AddToUndo();
+            activeSticker.configureHeight(-5);
+        }
+
+        private void plusHeight(object sender, MouseButtonEventArgs e)
+        {
+            AddToUndo();
+            activeSticker.configureHeight(5);
+        }
+
+        private void minusWidth(object sender, MouseButtonEventArgs e)
+        {
+            AddToUndo();
+            activeSticker.configureWidth(-5);
+        }
+
+        private void plusWidth(object sender, MouseButtonEventArgs e)
+        {
+            AddToUndo();
+            activeSticker.configureWidth(5);
+        }
+
+        private void AddToUndo()
+        {
+            Console.WriteLine("Added Added");
+            UndoRedo.AddUndo(activeSticker.Copy());
         }
 
         public void RemoveActive()
@@ -78,21 +113,9 @@ namespace CartoonMemento
         private void EditMode(object sender, MouseButtonEventArgs e)
         {
             RemoveActive();
-
-            MoveSticker((StickerImage)sender);
-        }
-
-        private void MoveSticker(StickerImage sticker)
-        {
-            activeSticker = sticker;
+            activeSticker = (StickerImage)sender;
             activeSticker.StartEdit();
             activeSticker.delete.MouseLeftButtonDown += RemoveSticker;
-        }
-
-        public void RemoveSticker(object sender, MouseButtonEventArgs e)
-        {
-            RemoveElement(activeSticker);
-            activeSticker = null;
         }
 
         private void MoveActiveSticker(object sender, MouseEventArgs e)
@@ -105,10 +128,41 @@ namespace CartoonMemento
             }
         }
 
+        public void RemoveSticker(object sender, MouseButtonEventArgs e)
+        {
+            RemoveElement(activeSticker);
+        }
+
         public void RemoveElement(StickerImage element)
         {
+            AddToUndo();
             canvas.Children.Remove(element);
             elems.Remove(element);
         }
+
+        public void PerformUndo()
+        {
+            if (activeSticker != null)
+            {
+                Console.WriteLine(activeSticker.Height + "  " + activeSticker.Width);
+                canvas.Children.Remove(activeSticker);
+                StickerImage sti = UndoRedo.Undo();
+                Console.WriteLine(sti.Height + "  " + sti.Width);
+                activeSticker = sti;
+                AddSticker(sti);
+            }
+        }
+
+        public void PerformRedo()
+        {
+            if (activeSticker != null)
+            {
+                canvas.Children.Remove(activeSticker);
+                StickerImage sti = UndoRedo.Redo();
+                activeSticker = sti;
+                AddSticker(sti);
+            }
+        }
+
     }
 }

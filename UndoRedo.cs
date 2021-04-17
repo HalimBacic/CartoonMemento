@@ -16,30 +16,32 @@ namespace CartoonMemento
         public UndoRedo()
         { }
 
-        public void AddUndo(StickerImage sti)
+        public void AddUndo(StickerImage Sticker)
         {
-            Console.WriteLine("Dodajem undo:"+sti.GetHashCode()+sti.Height+"  "+sti.Width+"  "+ DrawingCanvas.GetLeft(sti), DrawingCanvas.GetTop(sti));
-            undoStack.Push(sti);
+            Console.WriteLine("Dodajem undo:"+Sticker.GetHashCode()+" "+Sticker.Height+" "+Sticker.Width);
+            undoStack.Push(Sticker.Copy());
         }
 
-        public void AddRedo(StickerImage sti)
+        public void AddRedo(StickerImage Sticker)
         {
-            Console.WriteLine("Dodajem undo:" + sti.GetHashCode() + sti.Height + "  " + sti.Width + "  " + DrawingCanvas.GetLeft(sti), DrawingCanvas.GetTop(sti));
-            Console.WriteLine("Dodajem:" + sti.GetHashCode());
-            redoStack.Push(sti);
+            Console.WriteLine("Dodajem undo:" + Sticker.GetHashCode() + " " + Sticker.Height + " " + Sticker.Width);
+            redoStack.Push(Sticker.Copy());
         }
 
         public StickerImage Undo()
         {
             StickerImage undo =  (StickerImage)undoStack.Pop();
-            AddRedo(undo);
+            AddRedo(undo.Copy());
 
             return undo;
         }
 
         public StickerImage Redo()
         {
-            return (StickerImage)redoStack.Pop();
+            StickerImage redo = (StickerImage)redoStack.Pop();
+            AddUndo(redo.Copy());
+
+            return redo;
         }
     }
 }
