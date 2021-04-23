@@ -292,6 +292,8 @@ namespace CartoonMemento
         private void HelpWindow(object sender, MouseButtonEventArgs e)
         {
             Help helpWindow = new Help();
+            helpWindow.Topmost = true;
+            helpWindow.ShowActivated = true;
             helpWindow.Show();
         }
     }

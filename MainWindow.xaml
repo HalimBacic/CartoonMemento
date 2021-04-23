@@ -23,7 +23,8 @@
                 <MenuItem Header="Undo" Height="23" Width="100" PreviewMouseLeftButtonDown="UndoButton"/>
                 <MenuItem Header="Redo" Height="23" Width="100" PreviewMouseLeftButtonDown="RedoButton"/>
                 <MenuItem Header="Delete" Height="23" Width="100" PreviewMouseLeftButtonDown="DeleteActiveSticker"/>
-                <MenuItem Header="Import Stickers" Height="23" Width="100" PreviewMouseLeftButtonDown="ButtonImport_Click"/>
+                <MenuItem Header="Edit Image" Height="23" Width="100"/>
+                <MenuItem Header="Import Stickers" Height="23" Width="100"/>
             </MenuItem>
             <Separator></Separator>
             <MenuItem Height="18" Margin="0" Width="30" PreviewMouseLeftButtonDown="HelpWindow">
@@ -37,17 +38,22 @@
         <Button x:Name="buttonImport" Content="Import sticker" HorizontalAlignment="Left" Margin="10,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonImport_Click"/>
         <Grid HorizontalAlignment="Left" Height="705" Margin="10,33,0,0" VerticalAlignment="Top" Width="353" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="34*"/>
-                <ColumnDefinition Width="319*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="284" SelectionOpacity="1" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
-            <Image x:Name="searchImage" Margin="265,24,22,655" Source="Search_16x.png" Stretch="Fill" RenderTransformOrigin="-0.214,1.583" VerticalAlignment="Center" HorizontalAlignment="Center" Height="26" Width="32" Grid.Column="1"/>
-            <StackPanel x:Name="stickers" HorizontalAlignment="Left" Height="625" Margin="10,70,0,0" VerticalAlignment="Top" Width="333" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="textBox" Height="40" Margin="0,10,69,0" TextWrapping="Wrap"  VerticalAlignment="Top" SelectionOpacity="1" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1"/>
+            <StackPanel x:Name="stickers" HorizontalAlignment="Left" Height="625" Margin="0,70,0,0" VerticalAlignment="Top" Width="333" Grid.Column="1"/>
+            <Button x:Name="searchButton" Grid.Column="1" Margin="299,10,10,0" VerticalAlignment="Top" Height="40" PreviewMouseLeftButtonDown="SearchButton" RenderTransformOrigin="-0.065,2">
+               
+            </Button>
+
         </Grid>
-        <Grid x:Name="imageGrid" HorizontalAlignment="Left" Height="705" Margin="160,33,0,0" VerticalAlignment="Top" Width="1061" Grid.Column="1">
+        <Grid x:Name="imageGrid" HorizontalAlignment="Left" Height="705" Margin="368,33,0,0" VerticalAlignment="Top" Width="1061">
             <Grid.RowDefinitions>
-                <RowDefinition Height="14*"/>
-                <RowDefinition Height="159*"/>
+                <RowDefinition Height="0*"/>
+                <RowDefinition Height="352*"/>
+                <RowDefinition Height="340*"/>
+                <RowDefinition Height="13*"/>
             </Grid.RowDefinitions>
             <TextBox x:Name="imageStatus" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" TextWrapping="Wrap" Text="PICTURE INFO" VerticalAlignment="Top" Width="1041" FontSize="16"/>
             <Canvas x:Name="canvasImage" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" AllowDrop="True" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
