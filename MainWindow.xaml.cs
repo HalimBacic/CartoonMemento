@@ -65,17 +65,14 @@ namespace CartoonMemento
                 image.Height = bmp.Height;
                 image.Width = bmp.Width;
                 dc.LoadImage(image);
-                imageStatus.Text = ofd.FileName;
             }
             else
             {
-                imageStatus.Text = "Failure";
             }
         }
 
         private void CreateSticker(object sender, MouseButtonEventArgs e)
         {
-            imageStatus.Text = ((Image)sender).Source.ToString();
             StickerImage stickerImage = new StickerImage((Image)sender,this.dc);
             dc.AddSticker(stickerImage);
         }
@@ -135,6 +132,9 @@ namespace CartoonMemento
         {
             FileInfo dirInfo = new FileInfo(dir);
             Expander exp = new Expander();
+            exp.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(190,197,173));
+            exp.Padding = new Thickness(2);
+            exp.Margin = new Thickness(3);
             exp.Header = dirInfo.Name;
             exp.Width = 330;
             if (first == 0)
@@ -210,6 +210,36 @@ namespace CartoonMemento
         private void saveAs(object sender, MouseButtonEventArgs e)
         {
             buttonSave_Click(sender,e);
+        }
+
+        private void ClearSticker(object sender,MouseButtonEventArgs e)
+        {
+            textBox.Text = "";
+        }
+
+        private void SearchButtonAction(object sender, MouseButtonEventArgs e)
+        {
+            string findSomething = textBox.Text;
+
+            UIElementCollection expanders = stickers.Children;
+
+            if (findSomething.Equals(""))
+            {
+                foreach (Expander expander in expanders)
+                {
+                    if (expander.HeaderStringFormat.Contains(findSomething))
+                    {
+                        expander.Visibility = Visibility.Visible;
+                        expander.IsExpanded = true;
+                    }
+                }
+            }
+            else
+            {
+                ((Expander)expanders[0]).IsExpanded = true;
+                foreach (Expander expander in expanders)
+                    expander.Visibility = Visibility.Visible;
+            }
         }
     }
 }

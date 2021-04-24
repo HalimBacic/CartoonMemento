@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CartoonMemento.Properties {
+namespace CartoonMemento.resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace CartoonMemento.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CartoonMemento.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CartoonMemento.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CartoonMemento.resources.resources", typeof(resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,33 @@ namespace CartoonMemento.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \resources\res.
+        /// </summary>
+        public static string buttons {
+            get {
+                return ResourceManager.GetString("buttons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento.
+        /// </summary>
+        public static string installDir {
+            get {
+                return ResourceManager.GetString("installDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \resources\Stickers.
+        /// </summary>
+        public static string stickers {
+            get {
+                return ResourceManager.GetString("stickers", resourceCulture);
             }
         }
     }

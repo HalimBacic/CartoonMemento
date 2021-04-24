@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="buttons" xml:space="preserve">
+    <value>\resources\res</value>
+  </data>
+  <data name="installDir" xml:space="preserve">
+    <value>D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento</value>
+  </data>
+  <data name="stickers" xml:space="preserve">
+    <value>\resources\Stickers</value>
+  </data>
 </root>
