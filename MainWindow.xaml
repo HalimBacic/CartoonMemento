@@ -55,13 +55,13 @@
                 <MenuItem Header="New" Height="23" Width="100" Click="ButtonLoad_Click"/>
                 <MenuItem Header="Open" Height="23" Width="100" Click="ButtonLoad_Click"/>
                 <MenuItem Header="Save" Height="23" Width="100" Click="buttonSave_Click"/>
-                <MenuItem Header="Save as" Height="23" Width="100" FontSize="15" PreviewMouseLeftButtonDown="saveAs"/>
+                <MenuItem Header="Save as" Height="23" Width="100" FontSize="15" PreviewMouseLeftButtonDown="SaveAs"/>
                 <MenuItem Header="Exit" Height="23" Width="100" PreviewMouseLeftButtonDown="Exit_MouseLeftButtonDown"/>
             </MenuItem>
             <MenuItem Header="Edit"  Style="{StaticResource myMenuItem}" Height="23" Margin="0" Width="100">
                 <MenuItem Header="Undo" Height="23" Width="100"/>
                 <MenuItem Header="Redo" Height="23" Width="100"/>
-                <MenuItem Header="Delete" Height="23" Width="100" Click="DeleteActiveSticker"/>
+                <MenuItem Header="Delete" Height="23" Width="100" PreviewMouseLeftButtonDown="DeleteActiveSticker"/>
                 <MenuItem Header="Import Stickers" Height="23" Width="100" Click="buttonImport_Click"/>
             </MenuItem>
             <MenuItem Header="About"  Style="{StaticResource myMenuItem}" Height="23" Margin="0" Width="100">
@@ -83,12 +83,19 @@
                      VerticalContentAlignment="Center" Grid.ColumnSpan="2" 
                      PreviewMouseLeftButtonDown="ClearSticker"/>
 
-            <StackPanel x:Name="stickers" Height="625" Margin="10,70,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+            <ScrollViewer Grid.ColumnSpan="2" Margin="10,54,10,0">
+                <StackPanel x:Name="stickers" Height="625" Margin="10,70,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+
+                </StackPanel>
+            </ScrollViewer>
+
             <Button x:Name="button" Content="Search" PreviewMouseLeftButtonDown="SearchButtonAction" RenderTransformOrigin="0,1.55" Grid.Column="1" Margin="269,9,10,656">
                 
                 
                 
             </Button>
+
+
         </Grid>
         <Grid x:Name="imageGrid" HorizontalAlignment="Left" Height="705" Margin="368,33,0,0" VerticalAlignment="Top" Width="1061">
             <Grid.RowDefinitions>

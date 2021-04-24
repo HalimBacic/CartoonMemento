@@ -207,7 +207,7 @@ namespace CartoonMemento
             dc.RemoveSticker(dc.getActive(),e);
         }
 
-        private void saveAs(object sender, MouseButtonEventArgs e)
+        private void SaveAs(object sender, MouseButtonEventArgs e)
         {
             buttonSave_Click(sender,e);
         }
@@ -223,14 +223,19 @@ namespace CartoonMemento
 
             UIElementCollection expanders = stickers.Children;
 
-            if (findSomething.Equals(""))
+            if (!findSomething.Equals(""))
             {
                 foreach (Expander expander in expanders)
                 {
-                    if (expander.HeaderStringFormat.Contains(findSomething))
+                    string header = (string)expander.Header;
+                    if (header.Contains(findSomething))
                     {
                         expander.Visibility = Visibility.Visible;
                         expander.IsExpanded = true;
+                    }
+                    else
+                    {
+                        expander.Visibility = Visibility.Hidden;
                     }
                 }
             }
