@@ -65,8 +65,6 @@
                 <MenuItem Header="Import Stickers" Height="23" Width="100" Click="buttonImport_Click"/>
             </MenuItem>
             <MenuItem Header="About"  Style="{StaticResource myMenuItem}" Height="23" Margin="0" Width="100">
-                <MenuItem Header="About" Height="23" Width="100"/>
-                <MenuItem Header="Help" Height="23" Width="100"/>
             </MenuItem>
         </Menu>
         <Button x:Name="buttonSave" Style="{StaticResource myButton}" Content="Save Image" HorizontalAlignment="Left" Margin="273,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="buttonSave_Click"/>
