@@ -4,19 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CartoonMemento"
+        xmlns:r="clr-namespace:CartoonMemento.resources"
         mc:Ignorable="d"
-        Title="HelpWindow" Height="797" Width="519">
+        Title="HelpWindow" Height="787" Width="549">
 
     <Window.Resources>
         <Style x:Key="AboutTextBox" TargetType="{x:Type TextBlock}">
             <Setter Property="FontFamily" Value="Trebuchet MS"></Setter>
             <Setter Property="FontWeight" Value="SemiBold"></Setter>
             <Setter Property="FontSize" Value="15pt"></Setter>
-            <Setter Property="Padding" Value="7pt"></Setter>
+            <Setter Property="Padding" Value="17pt"></Setter>
         </Style>
         <Style x:Key="HelpTextBox" TargetType="{x:Type TextBox}">
             <Setter Property="FontFamily" Value="Trebuchet MS"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="13pt"></Setter>
             <Setter Property="Padding" Value="9pt"></Setter>
             <Setter Property="Background" Value="#FFA4B494"></Setter>
             <Setter Property="BorderBrush" Value="Black"></Setter>
@@ -24,11 +26,10 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="0,0,-8,-21"  Background="#FFA4B494">
-        <TextBlock Style="{StaticResource AboutTextBox}" x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="185" Width="499"/>
-        <ScrollViewer HorizontalAlignment="Left" Height="602" Margin="10,175,0,0" VerticalAlignment="Top" Width="499">
-            <TextBox Style="{StaticResource HelpTextBox}" x:Name="textBox" Height="594" TextWrapping="Wrap" Text="TextBox" Width="470"/>
-        </ScrollViewer>
+    <Grid Margin="0,0,-8,-31"  Background="#FFA4B494">
+        <TextBlock Style="{StaticResource AboutTextBox}" x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="185" Width="499"><Run Text="CartoonMemento v1.0.0"/><LineBreak/><Run Text="Free Software for photo editing"/><LineBreak/><Run Text="Programed by Halim Bacic"/></TextBlock>
+        <TextBox Style="{StaticResource HelpTextBox}" VerticalScrollBarVisibility="Auto"  x:Name="textBox" TextWrapping="Wrap" Width="470" Text="CartoonMemento is application for photo editing . You can choose yout best picture and put cartoon heroes inside it. &#xA;&#xA;Button Load Image is used for load your image in software. After your image is loaded, you can fint your sticker in left side box. &#xA;&#xA;After you click on sticker in left box, sticker appears on your image. If you click on added sticker, you can see small buttons in top-left and right-bottom corner. &#xA;&#xA;Buttons in left-top corner allow you to move sticker arround loaded image or to delete sticker from current image. &#xA;&#xA;In right-bottom corner you can click on plus or minus to adjust sticker size on other dimensions. &#xA;&#xA;You can put unlimited number of stickers on your image.&#xA;&#xA;If you want to add some  of your stickers you can click on button Import stickers and choose your folder with your stickers. Sticker must be in png format with transparent background.&#xD;&#xA;&#xD;&#xA;If you click on button Save Image you can choose location where you want to save your image on your system." Margin="39,416,40,22"/>
+        <Image x:Name="image" Source="{Binding Source={x:Static r:resources.helpImage}}" HorizontalAlignment="Left" Height="285" Margin="115,126,0,0" VerticalAlignment="Top" Width="300"/>
 
     </Grid>
 </Window>

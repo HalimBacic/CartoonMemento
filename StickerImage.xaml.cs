@@ -12,21 +12,26 @@ namespace CartoonMemento
     /// </summary>
     public partial class StickerImage : Canvas
     {
-        public static  readonly DependencyProperty CanMove = DependencyProperty.Register("canMove",typeof(Boolean), typeof(StickerImage));
-        private DrawingCanvas canvas;
+        public int id;
+        public static readonly DependencyProperty CanMove = DependencyProperty.Register("canMove", typeof(Boolean), typeof(StickerImage));
 
         public Boolean canMove
         {
             get { return (Boolean)this.GetValue(CanMove); }
-            set { this.SetValue(CanMove,value); }
+            set { this.SetValue(CanMove, value); }
         }
 
-        public StickerImage(Image image,DrawingCanvas canvas)
+        public StickerImage(Image image, DrawingCanvas canvas)
         {
+            Random random = new Random();
             InitializeComponent();
-            this.canvas = canvas;
             myImage.Source = image.Source;
             myImage.MouseEnter += ChangeCursor;
+        }
+
+        public StickerImage Copy()
+        {
+            return (StickerImage)this.MemberwiseClone();
         }
 
         public void StopEdit()
@@ -43,7 +48,7 @@ namespace CartoonMemento
 
         private void ChangeCursor(object sender, MouseEventArgs e)
         {
-             myImage.Cursor = Cursors.Hand;
+            myImage.Cursor = Cursors.Hand;
         }
 
         private void ResizeCursor(object sender, MouseEventArgs e)
@@ -51,34 +56,16 @@ namespace CartoonMemento
             ((Image)sender).Cursor = Cursors.SizeNWSE;
         }
 
-        private void plusHeight(object sender, MouseEventArgs e)
-        {
-            configureHeight(5);
-        }
 
-        private void plusWidth(object sender, MouseEventArgs e)
-        {
-            configureWidth(5);
-        }
 
-        private void minusHeight(object sender, MouseEventArgs e)
-        {
-            configureHeight(-5);
-        }
-
-        private void minusWidth(object sender, MouseEventArgs e)
-        {
-            configureWidth(-5);
-        }
-
-        private void configureWidth(int value)
+        public void configureWidth(int value)
         {
             stickerCanvas.Width += value;
             points.Width += value;
             myImage.Width += value;
         }
 
-        private void configureHeight(int value)
+        public void configureHeight(int value)
         {
             stickerCanvas.Height += value;
             points.Height += value;

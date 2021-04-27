@@ -14,6 +14,7 @@ using Image = System.Windows.Controls.Image;
 using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
 using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.Resources;
 
 namespace CartoonMemento
 {
@@ -25,6 +26,7 @@ namespace CartoonMemento
 
         private int first = 0;
         private DrawingCanvas dc;
+        private Boolean isSaved = false;
 
         public MainWindow()
         {
@@ -37,7 +39,14 @@ namespace CartoonMemento
         {
             canvasImage.AllowDrop = true;
             //TODO Change this to avoid hardcore programming
-            string path = "D:\\Fakultet\\HCI\\PROJEKAT\\CartoonMemento\\CartoonMemento\\resources\\Stickers";
+
+            string resXfile = @".\Resources.resx";
+            string path;
+
+            using (ResXResourceSet resultSet = new ResXResourceSet(resXfile))
+            {
+                path = resultSet.GetString("stickers");
+            }
 
             dc = new DrawingCanvas(canvasImage);
             string[] dirs = Directory.GetDirectories(path);
@@ -66,8 +75,9 @@ namespace CartoonMemento
                 image.Width = bmp.Width;
                 dc.LoadImage(image);
             }
-            else
+            else if(ofd.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
             {
+                DialogResult res = MessageBox.Show("Picture loading canceled.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -77,9 +87,9 @@ namespace CartoonMemento
             dc.AddSticker(stickerImage);
         }
 
-        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            dc.removeActive();
+            dc.RemoveActive();
             Stream myStream;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
@@ -110,11 +120,15 @@ namespace CartoonMemento
                     png.Save(myStream);
                     myStream.Close();
                 }
+                DialogResult res = MessageBox.Show("Picture saved in folder", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            DialogResult res = MessageBox.Show("Picture saved in folder", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            {
+                DialogResult res = MessageBox.Show("Problem with saving", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
-        private void buttonImport_Click(object sender, RoutedEventArgs e)
+        private void ButtonImport_Click(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
 
@@ -204,12 +218,12 @@ namespace CartoonMemento
 
         private void DeleteActiveSticker(object sender, MouseButtonEventArgs e)
         {
-            dc.RemoveSticker(dc.getActive(),e);
+            dc.RemoveSticker(dc.GetActive(),e);
         }
 
         private void SaveAs(object sender, MouseButtonEventArgs e)
         {
-            buttonSave_Click(sender,e);
+            ButtonSave_Click(sender,e);
         }
 
         private void ClearSticker(object sender,MouseButtonEventArgs e)
@@ -245,6 +259,13 @@ namespace CartoonMemento
                 foreach (Expander expander in expanders)
                     expander.Visibility = Visibility.Visible;
             }
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            HelpWindow hw = new HelpWindow();
+            hw.Topmost = true;
+            hw.Show();
         }
     }
 }

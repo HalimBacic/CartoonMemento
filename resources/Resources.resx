@@ -120,10 +120,16 @@
   <data name="buttons" xml:space="preserve">
     <value>\resources\res</value>
   </data>
+  <data name="helpImage" xml:space="preserve">
+    <value>D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento\resources\res\helpImage.png</value>
+  </data>
   <data name="installDir" xml:space="preserve">
     <value>D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento</value>
   </data>
+  <data name="searchBtn" xml:space="preserve">
+    <value>D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento\resources\res\search.png</value>
+  </data>
   <data name="stickers" xml:space="preserve">
-    <value>\resources\Stickers</value>
+    <value>D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento\resources\Stickers</value>
   </data>
 </root>

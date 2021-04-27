@@ -70,6 +70,15 @@ namespace CartoonMemento.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento\resources\res\helpImage.png.
+        /// </summary>
+        public static string helpImage {
+            get {
+                return ResourceManager.GetString("helpImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento.
         /// </summary>
         public static string installDir {
@@ -79,7 +88,16 @@ namespace CartoonMemento.resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \resources\Stickers.
+        ///   Looks up a localized string similar to D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento\resources\res\search.png.
+        /// </summary>
+        public static string searchBtn {
+            get {
+                return ResourceManager.GetString("searchBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D:\Fakultet\HCI\PROJEKAT\CartoonMemento\CartoonMemento\resources\Stickers.
         /// </summary>
         public static string stickers {
             get {

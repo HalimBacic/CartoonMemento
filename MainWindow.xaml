@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CartoonMemento"
-        xmlns:resources="clr-namespace:CartoonMemento.resources"
+        xmlns:r="clr-namespace:CartoonMemento.resources"
         xmlns:properties="clr-namespace:CartoonMemento.Properties"
         mc:Ignorable="d"
-        Title="CartoonMemento" Height="839" Width="1493.925" SizeToContent="WidthAndHeight" Topmost="True" ResizeMode="CanResizeWithGrip" AllowDrop="True" BorderBrush="#FFA4B494">
+        Title="CartoonMemento" Height="852" Width="1563.962" SizeToContent="WidthAndHeight" Topmost="True" ResizeMode="CanMinimize" AllowDrop="True" BorderBrush="#FFA4B494">
 
 
     <Window.Resources>
@@ -49,12 +49,12 @@
     </Window.Resources>
 
 
-    <Grid Margin="0,0,2,1" Background="#FFA4B494">
+    <Grid Margin="0,0,2,-1" Background="#FFA4B494" Height="824" VerticalAlignment="Top">
         <Menu x:Name="menu" Style="{StaticResource myMenu}" Height="28" VerticalAlignment="Top" FontFamily="Noto Mono" FontSize="16">
             <MenuItem Header="File" Style="{StaticResource myMenuItem}" Height="23" Margin="0" Width="100">
                 <MenuItem Header="New" Height="23" Width="100" Click="ButtonLoad_Click"/>
                 <MenuItem Header="Open" Height="23" Width="100" Click="ButtonLoad_Click"/>
-                <MenuItem Header="Save" Height="23" Width="100" Click="buttonSave_Click"/>
+                <MenuItem Header="Save" Height="23" Width="100" Click="ButtonSave_Click"/>
                 <MenuItem Header="Save as" Height="23" Width="100" FontSize="15" PreviewMouseLeftButtonDown="SaveAs"/>
                 <MenuItem Header="Exit" Height="23" Width="100" PreviewMouseLeftButtonDown="Exit_MouseLeftButtonDown"/>
             </MenuItem>
@@ -62,45 +62,39 @@
                 <MenuItem Header="Undo" Height="23" Width="100"/>
                 <MenuItem Header="Redo" Height="23" Width="100"/>
                 <MenuItem Header="Delete" Height="23" Width="100" PreviewMouseLeftButtonDown="DeleteActiveSticker"/>
-                <MenuItem Header="Import Stickers" Height="23" Width="100" Click="buttonImport_Click"/>
+                <MenuItem Header="Import Stickers" Height="23" Width="100" Click="ButtonImport_Click"/>
             </MenuItem>
-            <MenuItem Header="About"  Style="{StaticResource myMenuItem}" Height="23" Margin="0" Width="100">
+            <MenuItem Header="About"  Style="{StaticResource myMenuItem}" Height="23" Margin="0" Width="100" Click="About_Click">
             </MenuItem>
         </Menu>
-        <Button x:Name="buttonSave" Style="{StaticResource myButton}" Content="Save Image" HorizontalAlignment="Left" Margin="273,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="buttonSave_Click"/>
-        <Button x:Name="buttonLoad" Style="{StaticResource myButton}" Content="Load Image" HorizontalAlignment="Left" Margin="140,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonLoad_Click" RenderTransformOrigin="0.722,0.625"/>
-        <Button x:Name="buttonImport" Style="{StaticResource myButton}" Content="Import sticker" HorizontalAlignment="Left" Margin="10,760,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="buttonImport_Click"/>
-        <Grid HorizontalAlignment="Left" Height="705" Margin="10,33,0,0" VerticalAlignment="Top" Width="353">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="34*"/>
-                <ColumnDefinition Width="319*"/>
-            </Grid.ColumnDefinitions>
-            <TextBox Style="{StaticResource myTextBox}" x:Name="textBox" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top"
-                     Width="270" SelectionOpacity="1" FontSize="18" 
+        <Button x:Name="buttonSave" Style="{StaticResource myButton}" Content="Save Image" HorizontalAlignment="Left" Margin="300,765,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonSave_Click"/>
+        <Button x:Name="buttonLoad" Style="{StaticResource myButton}" Content="Load Image" HorizontalAlignment="Left" Margin="167,765,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonLoad_Click" RenderTransformOrigin="0.722,0.625"/>
+        <Button x:Name="buttonImport" Style="{StaticResource myButton}" Content="Import sticker" HorizontalAlignment="Right" Margin="0,765,1429,0" VerticalAlignment="Top" Width="90" Height="24" Click="ButtonImport_Click"/>
+        <Grid Height="705" Margin="10,33,1134,0" VerticalAlignment="Top">
+
+            <TextBox Style="{StaticResource myTextBox}" x:Name="textBox" Height="32" Margin="0,17,95,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" SelectionOpacity="1" FontSize="18" 
                      HorizontalContentAlignment="Center" 
-                     VerticalContentAlignment="Center" Grid.ColumnSpan="2" 
-                     PreviewMouseLeftButtonDown="ClearSticker"/>
+                     VerticalContentAlignment="Center" 
+                     PreviewMouseLeftButtonDown="ClearSticker" HorizontalAlignment="Right" Width="292"/>
 
-            <ScrollViewer Grid.ColumnSpan="2" Margin="10,54,10,0">
-                <StackPanel x:Name="stickers" Height="625" Margin="10,70,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
-
-                </StackPanel>
+            <ScrollViewer Margin="10,87,0,0">
+                <StackPanel x:Name="stickers" Height="625" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="375"/>
             </ScrollViewer>
 
-            <Button x:Name="button" Content="Search" PreviewMouseLeftButtonDown="SearchButtonAction" RenderTransformOrigin="0,1.55" Grid.Column="1" Margin="269,9,10,656">
-                
-                
-                
+            <Button x:Name="button" PreviewMouseLeftButtonDown="SearchButtonAction" RenderTransformOrigin="0,1.55" Margin="345,10,22,651">
+
+                <Image Source="{Binding Source={x:Static r:resources.searchBtn}}" RenderTransformOrigin="0.389,0.455" Width="45" Height="39"></Image>
+
             </Button>
 
 
         </Grid>
-        <Grid x:Name="imageGrid" HorizontalAlignment="Left" Height="705" Margin="368,33,0,0" VerticalAlignment="Top" Width="1061">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="14*"/>
-                <RowDefinition Height="221*"/>
-            </Grid.RowDefinitions>
-            <Canvas x:Name="canvasImage" AllowDrop="True" Grid.Row="1" Height="628" VerticalAlignment="Bottom" Margin="20,0,54,35"/>
+
+
+        <Grid Canvas.Left="240" x:Name="imageContainer" Canvas.Top="137" Margin="465,70,10,86">
+            <Canvas x:Name="canvasImage" Margin="85,0,149,10"/>
         </Grid>
+
+
     </Grid>
 </Window>
